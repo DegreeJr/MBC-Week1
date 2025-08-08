@@ -11,6 +11,10 @@ yarn-debug.log
 yarn-error.log
 
 # File environment lokal dan rahasia. JANGAN PERNAH masukkan ini ke image.
+.env
+.env.local
+.env.development.local
+.env.production.local
 
 # File sistem kontrol versi Git
 .git

@@ -1,17 +1,10 @@
 import Redis from 'ioredis';
-import fs from 'fs'; // Impor modul 'fs' untuk membaca file
 
-let redisPassword = null;
+// Langsung membaca password dari variabel lingkungan (environment variable)
+const redisPassword = process.env.REDIS_PASSWORD || null;
 
-// Cek jika variabel lingkungan REDIS_PASSWORD_FILE ada (saat berjalan di Docker)
-if (process.env.REDIS_PASSWORD_FILE) {
-  try {
-    // Baca isi file password yang path-nya diberikan oleh Docker Secret
-    redisPassword = fs.readFileSync(process.env.REDIS_PASSWORD_FILE, 'utf8').trim();
-    console.log("Konfigurasi: Menggunakan password dari Docker Secret.");
-  } catch (err) {
-    console.error("ERROR: Gagal membaca file password dari secret:", err);
-  }
+if (redisPassword) {
+  console.log("Konfigurasi: Menggunakan password dari environment variable.");
 } else {
   console.log("Konfigurasi: Menjalankan tanpa password (mode development lokal).");
 }
@@ -19,7 +12,7 @@ if (process.env.REDIS_PASSWORD_FILE) {
 const redis = new Redis({
   host: process.env.REDIS_HOST || '127.0.0.1',
   port: parseInt(process.env.REDIS_PORT) || 6379,
-  password: redisPassword, // Gunakan password yang dibaca dari file
+  password: redisPassword, // Menggunakan password dari environment variable
 });
 
 redis.on('connect', () => {

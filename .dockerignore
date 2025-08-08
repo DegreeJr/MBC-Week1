@@ -1,0 +1,34 @@
+# Folder dependensi. Ini adalah yang paling penting untuk diabaikan.
+# Dependensi akan di-install di dalam container.
+node_modules
+
+# Build output dari Next.js. Folder ini akan dibuat di dalam container saat build.
+.next
+
+# File log dari package manager
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# File environment lokal dan rahasia. JANGAN PERNAH masukkan ini ke image.
+.env
+.env.local
+.env.development.local
+.env.production.local
+
+# File sistem kontrol versi Git
+.git
+.gitignore
+
+# File konfigurasi spesifik untuk IDE
+.vscode
+.idea
+
+# File sistem operasi
+.DS_Store
+Thumbs.db
+
+# File dokumentasi dan konfigurasi Docker itu sendiri
+README.md
+Dockerfile
+.dockerignore
